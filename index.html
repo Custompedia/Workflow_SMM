@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Next — Custompedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --navy:#0C1829;--navy-2:#111F35;--navy-3:#162540;
+  --gold:#F4A229;--gold-2:#FFBE5C;--gold-dim:rgba(244,162,41,0.12);
+  --teal:#18B8CE;--teal-dim:rgba(24,184,206,0.1);
+  --green:#22C97A;--green-dim:rgba(34,201,122,0.1);
+  --white:#EEF3FF;--muted:rgba(238,243,255,0.42);
+  --muted-2:rgba(238,243,255,0.15);--muted-3:rgba(238,243,255,0.07);
+  --border:rgba(238,243,255,0.07);--border-2:rgba(238,243,255,0.12);
+  --card:rgba(17,31,53,0.8);
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+}
+body{background:var(--navy);color:var(--white);font-family:var(--font-body);font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 15% 5%,rgba(24,184,206,0.06) 0%,transparent 55%),radial-gradient(ellipse 70% 60% at 85% 85%,rgba(244,162,41,0.05) 0%,transparent 50%),repeating-linear-gradient(0deg,transparent,transparent 47px,rgba(238,243,255,0.025) 48px),repeating-linear-gradient(90deg,transparent,transparent 47px,rgba(238,243,255,0.025) 48px)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(12,24,41,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-brand{font-family:var(--font-head);font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.nav-brand em{color:var(--gold);font-style:normal}
+.nav-brand{display:flex;align-items:center;gap:9px}
+.nav-brand span{font-family:var(--font-head);font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.nav-logo-icon{width:28px;height:28px;flex-shrink:0}
+.nav-steps{display:flex;align-items:center;gap:8px}
+.nav-step{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--muted);cursor:pointer;transition:color .25s;text-transform:uppercase}
+.nav-step .dot{width:5px;height:5px;border-radius:50%;background:var(--muted-2);transition:all .25s}
+.nav-step.active{color:var(--gold)}
+.nav-step.active .dot{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+.nav-sep{width:20px;height:1px;background:var(--border-2)}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 48px 80px}
+.hero-eyebrow{font-family:var(--font-head);font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .7s .1s ease forwards}
+.hero h1{font-family:var(--font-head);font-size:clamp(72px,12vw,160px);font-weight:800;line-height:.95;letter-spacing:-.04em;margin-bottom:16px;opacity:0;animation:fadeUp .7s .25s ease forwards}
+.hero-sub{font-size:clamp(15px,1.5vw,18px);color:var(--muted);max-width:520px;line-height:1.7;margin:20px auto 56px;opacity:0;animation:fadeUp .7s .4s ease forwards}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp .7s .55s ease forwards;margin-bottom:60px}
+.hero-pill{display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:100px;border:1px solid var(--border-2);background:var(--muted-3);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s}
+.hero-pill:hover{border-color:rgba(238,243,255,.25);color:var(--white)}
+.hero-pill .pnum{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:var(--muted-2)}
+.scroll-hint{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp .7s .8s ease forwards}
+.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--gold),transparent);animation:lineBreath 2s ease-in-out infinite}
+.section-intro{position:relative;z-index:1;text-align:center;padding:100px 48px 60px}
+.section-intro h2{font-family:var(--font-head);font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:16px}
+.section-intro h2 em{font-style:normal;color:var(--gold)}
+.section-intro p{color:var(--muted);font-size:16px}
+.timeline{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 32px 80px}
+.timeline-track{position:absolute;left:68px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(244,162,41,.4) 8%,rgba(24,184,206,.3) 50%,rgba(34,201,122,.3) 92%,transparent 100%)}
+.phase{display:flex;gap:28px;margin-bottom:16px;opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+.phase.visible{opacity:1;transform:translateY(0)}
+.phase-left{flex-shrink:0;width:72px;display:flex;flex-direction:column;align-items:center;padding-top:20px;gap:8px}
+.phase-num{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;font-weight:800;position:relative;z-index:2;transition:transform .3s}
+.phase:hover .phase-num{transform:scale(1.08)}
+.c1{background:rgba(244,162,41,.12);border:1px solid rgba(244,162,41,.3);color:var(--gold)}
+.c2{background:rgba(24,184,206,.1);border:1px solid rgba(24,184,206,.25);color:var(--teal)}
+.c3{background:rgba(160,100,240,.1);border:1px solid rgba(160,100,240,.25);color:#B47AFF}
+.c4{background:rgba(244,162,41,.1);border:1px solid rgba(244,162,41,.25);color:#FFD080}
+.c5{background:rgba(34,201,122,.1);border:1px solid rgba(34,201,122,.25);color:var(--green)}
+.c6{background:rgba(220,80,80,.1);border:1px solid rgba(220,80,80,.25);color:#FF8080}
+.phase-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 32px 26px;backdrop-filter:blur(16px);position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;margin-bottom:12px}
+.phase:hover .phase-card{border-color:var(--border-2);transform:translateX(4px);box-shadow:0 12px 48px rgba(0,0,0,.3),-4px 0 0 var(--phase-accent,var(--gold))}
+.phase-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--phase-accent,transparent) 50%,transparent 100%);opacity:0;transition:opacity .3s}
+.phase:hover .phase-card::after{opacity:1}
+.phase-ghost{position:absolute;right:16px;top:-8px;font-family:var(--font-head);font-weight:800;font-size:120px;line-height:1;color:rgba(238,243,255,.025);pointer-events:none;user-select:none;letter-spacing:-.04em}
+.phase-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.phase-timing{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:4px 12px;border-radius:100px;border:1px solid var(--border-2);white-space:nowrap;flex-shrink:0}
+.phase-heading{font-family:var(--font-head);font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--white);line-height:1.2}
+.task-list{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.task{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:10px;background:rgba(238,243,255,.03);border:1px solid rgba(238,243,255,.05);transition:background .2s,border-color .2s}
+.task:hover{background:rgba(238,243,255,.06);border-color:var(--border-2)}
+.task-icon{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
+.ti-check{background:var(--green-dim);border:1px solid rgba(34,201,122,.25);color:var(--green)}
+.ti-arrow{background:var(--gold-dim);border:1px solid rgba(244,162,41,.2);color:var(--gold)}
+.task-body{flex:1}
+.task-body strong{display:block;font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px}
+.task-body span{font-size:13px;color:var(--muted);line-height:1.55}
+.alert{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:10px;margin-top:12px;font-size:13px;line-height:1.55}
+.alert-gold{background:rgba(244,162,41,.08);border:1px solid rgba(244,162,41,.2);color:rgba(255,190,92,.9)}
+.alert-teal{background:rgba(24,184,206,.07);border:1px solid rgba(24,184,206,.18);color:rgba(100,220,235,.9)}
+.alert-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.rev-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.rev-pill{font-size:11px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid var(--border-2);color:var(--muted);background:var(--muted-3)}
+.rev-pill strong{color:var(--gold)}
+.payment-section{position:relative;z-index:1;max-width:860px;margin:20px auto 0;padding:0 32px 60px}
+.payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.payment-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 28px 24px;backdrop-filter:blur(16px);transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.payment-card:hover{border-color:rgba(244,162,41,.3);transform:translateY(-3px)}
+.payment-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+.payment-card:hover::before{opacity:1}
+.payment-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.payment-amount{font-family:var(--font-head);font-size:52px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--white);margin-bottom:8px}
+.payment-desc{font-size:14px;color:var(--muted);margin-bottom:10px}
+.payment-timing{font-size:12px;color:rgba(244,162,41,.7)}
+.closing{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:20px 32px 120px}
+.closing-card{background:linear-gradient(135deg,rgba(22,37,64,.95),rgba(12,24,41,.98));border:1px solid var(--border-2);border-radius:24px;padding:64px 56px;text-align:center;position:relative;overflow:hidden}
+.closing-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(244,162,41,.07),transparent),radial-gradient(ellipse 40% 30% at 100% 100%,rgba(24,184,206,.05),transparent);pointer-events:none}
+.closing-card::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.closing-eyebrow{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.closing-h2{font-family:var(--font-head);font-size:clamp(36px,5vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:24px}
+.closing-body{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 16px;line-height:1.75}
+.closing-punch{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--white);margin:24px 0 40px;letter-spacing:-.01em}
+.closing-punch em{color:var(--gold);font-style:normal}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:100px;background:var(--gold);color:#0C1829;font-family:var(--font-head);font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(244,162,41,.3)}
+.cta-btn:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(244,162,41,.45)}
+.closing-contact{display:flex;gap:24px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+.closing-contact a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.closing-contact a:hover{color:var(--gold)}
+footer{position:relative;z-index:1;text-align:center;padding:32px 24px 48px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lineBreath{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+@media(max-width:700px){
+  nav{padding:14px 20px}.nav-steps{display:none}
+  .hero{padding:80px 24px 60px}.hero h1{font-size:64px}
+  .timeline,.payment-section,.closing{padding-left:20px;padding-right:20px}
+  .timeline-track{left:56px}.phase-left{width:56px}
+  .phase-num{width:40px;height:40px;font-size:15px;border-radius:10px}
+  .phase-card{padding:20px 18px}.phase-ghost{font-size:80px}
+  .payment-grid{grid-template-columns:1fr}.closing-card{padding:40px 28px}
+  .phase-top{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <svg class="nav-logo-icon" viewBox="355 274 393 393" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#F4A229" d="M509.74,274.01h108.97v309.03h-108.97c-85.28,0-154.51-69.23-154.51-154.51h0c0-85.28,69.23-154.51,154.51-154.51h0Z"/>
+      <path fill="#0999cd" d="M747.75,503.13v.4c0,77.93-63.18,141.11-141.11,141.11h-38.92l-75.03,60.2.76-60.2h-.08v-62.45h125v-219.69c72.44,5.96,129.38,66.64,129.38,140.63h0Z"/>
+      <path fill="#007ec8" d="M618.37,362.5v219.69h-125v-220.17h113.27c3.95,0,7.86.16,11.73.48h0Z"/>
+      <path fill="#007ec8" d="M618.37,361.95v.55c-3.87-.32-7.78-.48-11.73-.48h-113.27v220.17h-.34v-220.24h125.34Z"/>
+    </svg>
+    <span>CUSTOM<em>PEDIA</em></span>
+  </div>
+  <div class="nav-steps" id="navSteps">
+    <div class="nav-step" data-phase="1"><div class="dot"></div>Agreement</div>
+    <div class="nav-sep"></div>
+    <div class="nav-step" data-phase="2"><div class="dot"></div>Onboarding</div>
+    <div class="nav-sep"></div>
+    <div class="nav-step" data-phase="3"><div class="dot"></div>Strategy</div>
+    <div class="nav-sep"></div>
+    <div class="nav-step" data-phase="4"><div class="dot"></div>Production</div>
+    <div class="nav-sep"></div>
+    <div class="nav-step" data-phase="5"><div class="dot"></div>Live</div>
+    <div class="nav-sep"></div>
+    <div class="nav-step" data-phase="6"><div class="dot"></div>Settlement</div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Social Media Management — Custompedia</div>
+  <h1>What's Next?</h1>
+  <p class="hero-sub">After agreeing to our proposal, here's exactly what happens — step by step, no guesswork, no surprises.</p>
+  <div class="hero-pills">
+    <div class="hero-pill" onclick="scrollToPhase(1)"><span class="pnum">1</span>Agreement</div>
+    <div class="hero-pill" onclick="scrollToPhase(2)"><span class="pnum">2</span>Onboarding</div>
+    <div class="hero-pill" onclick="scrollToPhase(3)"><span class="pnum">3</span>Strategy</div>
+    <div class="hero-pill" onclick="scrollToPhase(4)"><span class="pnum">4</span>Production</div>
+    <div class="hero-pill" onclick="scrollToPhase(5)"><span class="pnum">5</span>Live</div>
+    <div class="hero-pill" onclick="scrollToPhase(6)"><span class="pnum">6</span>Settlement</div>
+  </div>
+  <div class="scroll-hint"><span>scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="section-intro">
+  <h2>Your Journey <em>With Us</em></h2>
+  <p>From agreement to your first content live — every step mapped out clearly.</p>
+</div>
+
+<div class="timeline">
+  <div class="timeline-track"></div>
+
+  <!-- PHASE 1 -->
+  <div class="phase" data-phase="1" style="--phase-accent:var(--gold)">
+    <div class="phase-left"><div class="phase-num c1">1</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">1</div>
+        <div class="phase-top">
+          <div class="phase-heading">Agreement & Down Payment</div>
+          <div class="phase-timing">Day 0</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Sign the Quotation</strong><span>Scan or photo, send back via WhatsApp or email.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Transfer Down Payment — 50% of total contract</strong><span>BCA 816-5522-440 a/n PT Custompedia Creative Group. Send proof of transfer after payment.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>We create your dedicated WhatsApp Group</strong><span>Created by our Managing Director. All coordination, updates, content previews, and daily communication happen here. Add other PICs from your team whenever needed.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Meet your dedicated team</strong><span>From Strategist, Social Media Specialist, and Creative Director — tailored to your Scope of Work.</span></div></div>
+        </div>
+        <div class="alert alert-gold"><span class="alert-icon">⚡</span><span>DP must be received within 3 days of signing. Onboarding begins only after DP is confirmed.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase" data-phase="2" style="--phase-accent:var(--teal)">
+    <div class="phase-left"><div class="phase-num c2">2</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">2</div>
+        <div class="phase-top">
+          <div class="phase-heading">Onboarding</div>
+          <div class="phase-timing">H+1 — 3 working days</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Sign the NDA <span style="font-weight:400;color:var(--muted)">(Non-Disclosure Agreement)</span></strong><span>Sent via WhatsApp or email. Protects your account data and business information. Accepted as physical signature (scan/photo) or e-sign.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Your Google Drive project folder is ready</strong><span>Folder: "Custompedia × [Brand Name] [Year]" — all assets, strategies, reports, and documents stored here. Accessible anytime.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Fill in the Brand Discovery Form</strong><span>Link sent in the WA Group. Takes about 15–20 minutes. The more detail you share, the stronger your strategy.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Upload your brand assets</strong><span>Logo, company profile, product photos, brand guideline (if any), and everything else on the Asset Request List we'll provide.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Provide account access</strong><span>Instagram Admin via Meta Business Suite, TikTok Creator Tools (if applicable), Meta Ads Manager (if applicable). Step-by-step guides sent in the WA Group.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Account Setup</strong><span>Once access is received, we handle account setup — whether creating new accounts or optimizing existing ones: bio, profile photo, Linktree, Highlight icons, and consistent username across platforms.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Confirm your approval PIC</strong><span>One designated person from your team to approve content. Approval window: 48 hours.</span></div></div>
+        </div>
+        <div class="alert alert-teal"><span class="alert-icon">💡</span><span>Target: completed within 3 working days after DP is received. The faster this is done, the sooner your first content goes live.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase" data-phase="3" style="--phase-accent:#B47AFF">
+    <div class="phase-left"><div class="phase-num c3">3</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">3</div>
+        <div class="phase-top">
+          <div class="phase-heading">Strategy & Creative Direction</div>
+          <div class="phase-timing">H+5 to H+10</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Receive your Strategy Brief</strong><span>Your Content Pillars, tone of voice, and storytelling direction for the next 3 months — built entirely around your brand.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Receive your Social Media Visual Guideline</strong><span>Color palette, moodboard, font direction, and visual templates — the creative foundation for every piece of content.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Give feedback within 2 working days</strong><span>Via WhatsApp is fine — no formal meeting needed unless there's something worth discussing in depth. Scale packages and above: a 30-minute call will be scheduled.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase" data-phase="4" style="--phase-accent:#FFD080">
+    <div class="phase-left"><div class="phase-num c4">4</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">4</div>
+        <div class="phase-top">
+          <div class="phase-heading">Production & First Approval</div>
+          <div class="phase-timing">H+7 to H+21</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Receive your Content Plan</strong><span>First month: 2 weeks or a full month — depending on the agreed visit shoot schedule. Includes posting dates, format (Reels/Carousel/Story), content pillar, and a brief per content.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Coordinate visit shoot schedule</strong><span>Our team confirms 3 days before the visit — location, timing, access details, and on-site contact.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Review & approve content before it goes live</strong><span>Preview shared via Google Drive link. Approve or leave revision notes within 48 hours.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Your first content goes live 🎉</strong><span>Posted at the optimal day and time, based on platform insight data.</span></div></div>
+        </div>
+        <div class="alert alert-gold"><span class="alert-icon">⏱</span><span>No response within 48 hours = content is approved and will be posted as scheduled.</span></div>
+        <div class="rev-grid">
+          <div class="rev-pill">Essentials / Essentials+ &nbsp;<strong>1× revision</strong></div>
+          <div class="rev-pill">Growth Starter / Full &nbsp;<strong>2× revision</strong></div>
+          <div class="rev-pill">Scale / Full Scale &nbsp;<strong>3× revision + priority</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase" data-phase="5" style="--phase-accent:var(--green)">
+    <div class="phase-left"><div class="phase-num c5">5</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">5</div>
+        <div class="phase-top">
+          <div class="phase-heading">We're Live — Running & Reporting</div>
+          <div class="phase-timing">Month 1 & 2</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>All content managed by Custompedia</strong><span>Posting, scheduling, captions, and hashtags — all handled at the optimal day and time based on platform insight data.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Active account management</strong><span>Depending on your package — from admin posting and community management to full engagement handling.</span></div></div>
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Your role: respond to inbound leads</strong><span>Reply to DM and WA inquiries within 2 hours during business hours. Follow up on any RFQ or leads that come in. We deliver leads to your door — closing is in your hands.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Regular performance reports</strong><span>Monthly, bi-weekly, or weekly — depending on your package. Every report includes data, highlights, and strategic recommendations for the next period.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase" data-phase="6" style="--phase-accent:#FF8080">
+    <div class="phase-left"><div class="phase-num c6">6</div></div>
+    <div style="flex:1">
+      <div class="phase-card">
+        <div class="phase-ghost">6</div>
+        <div class="phase-top">
+          <div class="phase-heading">Settlement & What's Ahead</div>
+          <div class="phase-timing">Start of Month 3</div>
+        </div>
+        <div class="task-list">
+          <div class="task"><div class="task-icon ti-arrow">→</div><div class="task-body"><strong>Pay remaining 50%</strong><span>Invoice sent 7 days before Month 3 begins. Reminder at H-3 if not yet settled. Same account: BCA 816-5522-440 a/n PT Custompedia Creative Group.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Receive your Final Performance Report</strong><span>A 3-month summary: growth, top-performing content, key insights, and strategic recommendations for what comes next.</span></div></div>
+          <div class="task"><div class="task-icon ti-check">✓</div><div class="task-body"><strong>Renewal & growth discussion</strong><span>Our team will reach out before your contract ends. No obligation — but we'll have the data to make a compelling case for what comes next.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT -->
+<div class="payment-section">
+  <div class="section-intro" style="padding-top:40px;padding-bottom:40px">
+    <h2>Payment <em>Structure</em></h2>
+    <p>Two payments. No hidden fees. No surprises.</p>
+  </div>
+  <div class="payment-grid">
+    <div class="payment-card"><div class="payment-label">Payment 1</div><div class="payment-amount">50%</div><div class="payment-desc">Down Payment — 50% of your total 3-month contract</div><div class="payment-timing">⚡ Due within 3 days of signing. Onboarding begins once confirmed.</div></div>
+    <div class="payment-card"><div class="payment-label">Payment 2</div><div class="payment-amount">50%</div><div class="payment-desc">Final Payment — remaining 50% balance</div><div class="payment-timing">📅 Due at the start of Month 3. We'll send a reminder 7 days before.</div></div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-card">
+    <div class="closing-eyebrow">Why Custompedia</div>
+    <h2 class="closing-h2">Ready When You Are.</h2>
+    <p class="closing-body">Great work doesn't happen by accident. It's built on clear process, the right team, and a partner who cares about your results as much as you do.</p>
+    <p class="closing-body">We've shown you exactly what to expect — because transparency is how every great partnership begins, and consistency is how we maintain it.</p>
+    <p class="closing-punch">One signature. <em>Let's build something worth following.</em></p>
+    <a href="https://wa.me/6282226171071" class="cta-btn">Get Started →</a>
+    <div class="closing-contact">
+      <a href="mailto:hello@custompedia.agency">hello@custompedia.agency</a>
+      <a href="#">@custompedia</a>
+      <a href="tel:082226171071">0822-2617-1071</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 PT. Custompedia Creative Group — Semarang, Jawa Tengah</p></footer>
+
+<script>
+const phases=document.querySelectorAll('.phase');
+const navSteps=document.querySelectorAll('.nav-step');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      const n=e.target.dataset.phase;
+      navSteps.forEach(s=>s.classList.toggle('active',s.dataset.phase===n));
+    }
+  });
+},{threshold:0.2,rootMargin:'-5% 0px -20% 0px'});
+phases.forEach((p,i)=>{p.style.transitionDelay=`${i*.04}s`;obs.observe(p);});
+function scrollToPhase(n){const el=document.querySelector(`[data-phase="${n}"]`);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+document.querySelectorAll('.nav-step').forEach(s=>s.addEventListener('click',()=>scrollToPhase(s.dataset.phase)));
+</script>
+</body>
+</html>
