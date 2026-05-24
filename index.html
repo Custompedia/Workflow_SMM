@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's Next — Custompedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --navy:#0C1829;--navy-2:#111F35;
+  --gold:#F4A229;--gold-2:#FFBE5C;--gold-dim:rgba(244,162,41,0.12);
+  --teal:#18B8CE;--teal-dim:rgba(24,184,206,0.1);
+  --green:#22C97A;--green-dim:rgba(34,201,122,0.1);
+  --purple:#A78BFA;--purple-dim:rgba(167,139,250,0.1);
+  --pink:#F472B6;--pink-dim:rgba(244,114,182,0.1);
+  --white:#EEF3FF;--muted:rgba(238,243,255,0.42);
+  --muted-2:rgba(238,243,255,0.15);--muted-3:rgba(238,243,255,0.07);
+  --border:rgba(238,243,255,0.07);--border-2:rgba(238,243,255,0.12);
+  --card:rgba(17,31,53,0.8);
+  --fh:'Bricolage Grotesque',sans-serif;
+  --fb:'Instrument Sans',sans-serif;
+  /* Service accent colors */
+  --c-smm:var(--teal);--c-brand:var(--gold);--c-visual:var(--pink);--c-kol:var(--green);
+}
+body{background:var(--navy);color:var(--white);font-family:var(--fb);font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 90% 70% at 15% 5%,rgba(24,184,206,0.06) 0%,transparent 55%),
+  radial-gradient(ellipse 70% 60% at 85% 85%,rgba(244,162,41,0.05) 0%,transparent 50%),
+  repeating-linear-gradient(0deg,transparent,transparent 47px,rgba(238,243,255,0.025) 48px),
+  repeating-linear-gradient(90deg,transparent,transparent 47px,rgba(238,243,255,0.025) 48px)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(12,24,41,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo-icon{width:26px;height:26px;flex-shrink:0}
+.nav-wordmark{font-family:var(--fh);font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.nav-wordmark em{color:var(--gold);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:6px}
+.nav-pill-sm{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:4px 12px;border-radius:20px;border:1px solid var(--border-2);background:var(--muted-3)}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 40px 80px}
+.hero-eyebrow{font-family:var(--fh);font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0;animation:fu .7s .1s forwards}
+.hero h1{font-family:var(--fh);font-size:clamp(72px,12vw,150px);font-weight:800;line-height:.95;letter-spacing:-.04em;opacity:0;animation:fu .7s .25s forwards}
+.hero-sub{font-size:clamp(15px,1.4vw,17px);color:var(--muted);max-width:500px;margin:20px auto 48px;opacity:0;animation:fu .7s .4s forwards}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fu .7s .8s forwards}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:lb 2s ease-in-out infinite}
+
+/* SERVICE TABS */
+.tabs-wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 24px}
+.tabs-header{display:flex;gap:4px;background:rgba(238,243,255,.04);border:1px solid var(--border);border-radius:16px;padding:5px;margin-bottom:48px;position:sticky;top:68px;z-index:100;backdrop-filter:blur(20px)}
+.tab-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:12px;border:none;background:transparent;color:var(--muted);font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.03em;white-space:nowrap}
+.tab-btn .tab-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5;transition:opacity .2s;flex-shrink:0}
+.tab-btn:hover{color:var(--white)}
+.tab-btn.active{color:#0C1829;font-weight:700}
+.tab-btn.t-smm.active{background:var(--teal)}
+.tab-btn.t-brand.active{background:var(--gold)}
+.tab-btn.t-visual.active{background:var(--pink)}
+.tab-btn.t-kol.active{background:var(--green)}
+.tab-btn.active .tab-dot{opacity:1}
+
+/* TAB PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SERVICE LABEL */
+.svc-label{display:flex;align-items:center;gap:12px;margin-bottom:36px;padding:16px 20px;border-radius:14px;border:1px solid var(--border)}
+.svc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.svc-title{font-family:var(--fh);font-size:18px;font-weight:700}
+.svc-desc{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* TIMELINE */
+.timeline{position:relative}
+.tl-track{position:absolute;left:36px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 0%,var(--accent,var(--teal)) 8%,rgba(238,243,255,.15) 60%,transparent 100%)}
+.phase{display:flex;gap:24px;margin-bottom:12px;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.phase.visible{opacity:1;transform:translateY(0)}
+.phase-left{flex-shrink:0;width:72px;display:flex;flex-direction:column;align-items:center;padding-top:18px}
+.phase-num{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:17px;font-weight:800;position:relative;z-index:2;transition:transform .3s;border:1px solid}
+.phase:hover .phase-num{transform:scale(1.08)}
+
+/* Phase number color variants per service */
+.t-smm  .p1{background:rgba(24,184,206,.12);border-color:rgba(24,184,206,.3);color:var(--teal)}
+.t-smm  .p2{background:rgba(24,184,206,.1);border-color:rgba(24,184,206,.25);color:var(--teal)}
+.t-smm  .p3{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.25);color:var(--purple)}
+.t-smm  .p4{background:rgba(244,162,41,.1);border-color:rgba(244,162,41,.25);color:var(--gold)}
+.t-smm  .p5{background:rgba(34,201,122,.1);border-color:rgba(34,201,122,.25);color:var(--green)}
+.t-smm  .p6{background:rgba(220,80,80,.1);border-color:rgba(220,80,80,.25);color:#FF8080}
+.t-brand .p1{background:rgba(244,162,41,.12);border-color:rgba(244,162,41,.3);color:var(--gold)}
+.t-brand .p2{background:rgba(244,162,41,.1);border-color:rgba(244,162,41,.25);color:var(--gold)}
+.t-brand .p3{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.25);color:var(--purple)}
+.t-brand .p4{background:rgba(34,201,122,.1);border-color:rgba(34,201,122,.25);color:var(--green)}
+.t-brand .p5{background:rgba(220,80,80,.1);border-color:rgba(220,80,80,.25);color:#FF8080}
+.t-visual .p1{background:rgba(244,114,182,.12);border-color:rgba(244,114,182,.3);color:var(--pink)}
+.t-visual .p2{background:rgba(244,114,182,.1);border-color:rgba(244,114,182,.25);color:var(--pink)}
+.t-visual .p3{background:rgba(244,162,41,.1);border-color:rgba(244,162,41,.25);color:var(--gold)}
+.t-visual .p4{background:rgba(34,201,122,.1);border-color:rgba(34,201,122,.25);color:var(--green)}
+.t-kol   .p1{background:rgba(34,201,122,.12);border-color:rgba(34,201,122,.3);color:var(--green)}
+.t-kol   .p2{background:rgba(34,201,122,.1);border-color:rgba(34,201,122,.25);color:var(--green)}
+.t-kol   .p3{background:rgba(24,184,206,.1);border-color:rgba(24,184,206,.25);color:var(--teal)}
+.t-kol   .p4{background:rgba(244,162,41,.1);border-color:rgba(244,162,41,.25);color:var(--gold)}
+.t-kol   .p5{background:rgba(220,80,80,.1);border-color:rgba(220,80,80,.25);color:#FF8080}
+
+/* PHASE CARD */
+.phase-card{flex:1;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 28px 22px;backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;margin-bottom:8px}
+.phase:hover .phase-card{border-color:var(--border-2);transform:translateX(3px);box-shadow:0 8px 40px rgba(0,0,0,.25),-3px 0 0 var(--ac,var(--teal))}
+.phase-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ac,var(--teal)),transparent);opacity:0;transition:opacity .3s}
+.phase:hover .phase-card::after{opacity:1}
+.phase-ghost{position:absolute;right:14px;top:-6px;font-family:var(--fh);font-weight:800;font-size:110px;line-height:1;color:rgba(238,243,255,.022);pointer-events:none;letter-spacing:-.04em}
+.phase-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.phase-timing{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:3px 10px;border-radius:20px;border:1px solid var(--border-2);white-space:nowrap;flex-shrink:0}
+.phase-heading{font-family:var(--fh);font-size:19px;font-weight:700;letter-spacing:-.02em;color:var(--white)}
+
+/* TASKS */
+.task-list{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.task{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:9px;background:rgba(238,243,255,.03);border:1px solid rgba(238,243,255,.05);transition:background .2s,border-color .2s}
+.task:hover{background:rgba(238,243,255,.06);border-color:var(--border-2)}
+.task-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px}
+.ti-c{background:var(--green-dim);border:1px solid rgba(34,201,122,.25);color:var(--green)}
+.ti-a{background:var(--gold-dim);border:1px solid rgba(244,162,41,.2);color:var(--gold)}
+.task-body{flex:1}
+.task-body strong{display:block;font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px}
+.task-body span{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ALERTS */
+.alert{display:flex;gap:10px;padding:11px 14px;border-radius:9px;margin-top:10px;font-size:13px;line-height:1.5}
+.a-gold{background:rgba(244,162,41,.08);border:1px solid rgba(244,162,41,.2);color:rgba(255,190,92,.9)}
+.a-teal{background:rgba(24,184,206,.07);border:1px solid rgba(24,184,206,.18);color:rgba(100,220,235,.9)}
+.a-green{background:rgba(34,201,122,.07);border:1px solid rgba(34,201,122,.18);color:rgba(100,220,160,.9)}
+.al-i{font-size:13px;flex-shrink:0;margin-top:1px}
+
+/* REVISION PILLS */
+.rev-grid{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.rev-pill{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;border:1px solid var(--border-2);color:var(--muted);background:var(--muted-3)}
+.rev-pill strong{color:var(--gold)}
+
+/* PAYMENT CARDS */
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.pay-card:hover{border-color:rgba(244,162,41,.3);transform:translateY(-3px)}
+.pay-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+.pay-card:hover::before{opacity:1}
+.pay-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.pay-amount{font-family:var(--fh);font-size:46px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--white);margin-bottom:6px}
+.pay-desc{font-size:14px;color:var(--muted);margin-bottom:8px}
+.pay-timing{font-size:12px;color:rgba(244,162,41,.7)}
+
+/* 3-STEP PAYMENT (for Branding & Visual) */
+.pay-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:40px}
+.pay-step-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;transition:border-color .3s}
+.pay-step-card:hover{border-color:var(--border-2)}
+.pay-step-num{width:32px;height:32px;border-radius:50%;background:var(--muted-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:700;font-size:13px;margin:0 auto 10px}
+.pay-step-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.pay-step-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.pay-step-amt{font-family:var(--fh);font-size:18px;font-weight:700;color:var(--gold);margin-top:6px}
+
+/* CLOSING */
+.closing-wrap{position:relative;z-index:1;max-width:860px;margin:60px auto 0;padding:0 24px 100px}
+.closing-card{background:linear-gradient(135deg,rgba(22,37,64,.95),rgba(12,24,41,.98));border:1px solid var(--border-2);border-radius:22px;padding:56px 48px;text-align:center;position:relative;overflow:hidden}
+.closing-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(244,162,41,.07),transparent),radial-gradient(ellipse 40% 30% at 100% 100%,rgba(24,184,206,.05),transparent);pointer-events:none}
+.closing-card::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.closing-ey{font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.closing-h2{font-family:var(--fh);font-size:clamp(32px,5vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px}
+.closing-body{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 14px;line-height:1.75}
+.closing-punch{font-family:var(--fh);font-size:17px;font-weight:700;color:var(--white);margin:20px 0 36px;letter-spacing:-.01em}
+.closing-punch em{color:var(--gold);font-style:normal}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:100px;background:var(--gold);color:#0C1829;font-family:var(--fh);font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(244,162,41,.3)}
+.cta-btn:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(244,162,41,.45)}
+.closing-contact{display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.closing-contact a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.closing-contact a:hover{color:var(--gold)}
+
+footer{position:relative;z-index:1;text-align:center;padding:28px 24px 48px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+
+/* SPACER */
+.svc-spacer{height:48px}
+
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lb{0%,100%{opacity:.4}50%{opacity:1}}
+
+@media(max-width:680px){
+  nav{padding:12px 18px}.nav-r{display:none}
+  .hero{padding:80px 20px 60px}.hero h1{font-size:64px}
+  .tabs-wrap{padding:0 16px}
+  .tabs-header{gap:2px;padding:4px;top:60px}
+  .tab-btn{font-size:11px;padding:8px 10px;gap:5px}
+  .tl-track{left:32px}
+  .phase-left{width:64px}
+  .phase-num{width:38px;height:38px;font-size:15px;border-radius:10px}
+  .phase-card{padding:18px 16px}
+  .phase-ghost{font-size:80px}
+  .phase-top{flex-direction:column;gap:6px}
+  .pay-grid,.pay-steps{grid-template-columns:1fr}
+  .closing-card{padding:36px 24px}
+}
+
+/* ── DUAL VIEW SYSTEM ── */
+.view-toggle{display:flex;gap:4px;background:rgba(238,243,255,.06);border:1px solid var(--border-2);border-radius:10px;padding:3px;flex-shrink:0}
+.vt-btn{padding:5px 14px;border-radius:8px;border:none;background:transparent;font-family:var(--fb);font-size:11px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;letter-spacing:.03em}
+.vt-btn.active{color:#0C1829;background:var(--white)}
+.vt-btn.vt-internal.active{background:var(--purple);color:var(--white)}
+
+/* PIC tag */
+.pic-tag{display:inline-block;margin-top:5px;font-size:10px;font-weight:600;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(167,139,250,.25);border-radius:5px;padding:1px 8px;letter-spacing:.04em}
+
+/* Internal-only task styling */
+.task.internal-only{border-color:rgba(167,139,250,.15);background:rgba(167,139,250,.04)}
+.task.internal-only:hover{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08)}
+.task-icon.ti-int{background:var(--purple-dim);border:1px solid rgba(167,139,250,.25);color:var(--purple)}
+
+/* View state: client hides internal-only; internal shows all */
+.smm-client-view .internal-only{display:none}
+.smm-internal-view .internal-only{display:flex}
+.smm-client-view .pic-tag{display:none}
+/* Default = client view */
+#panel-smm .timeline{/* set by JS */}
+
+@media(max-width:680px){
+  .view-toggle{margin-top:8px}
+  .svc-label{flex-wrap:wrap}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <svg class="nav-logo-icon" viewBox="355 274 393 393" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#F4A229" d="M509.74,274.01h108.97v309.03h-108.97c-85.28,0-154.51-69.23-154.51-154.51h0c0-85.28,69.23-154.51,154.51-154.51h0Z"/>
+      <path fill="#0999cd" d="M747.75,503.13v.4c0,77.93-63.18,141.11-141.11,141.11h-38.92l-75.03,60.2.76-60.2h-.08v-62.45h125v-219.69c72.44,5.96,129.38,66.64,129.38,140.63h0Z"/>
+      <path fill="#007ec8" d="M618.37,362.5v219.69h-125v-220.17h113.27c3.95,0,7.86.16,11.73.48h0Z"/>
+    </svg>
+    <span class="nav-wordmark">CUSTOM<em>PEDIA</em></span>
+  </a>
+  <div class="nav-r">
+    <div class="nav-pill-sm">Client Journey</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Custompedia — Client Journey</div>
+  <h1>What's Next?</h1>
+  <p class="hero-sub">After agreeing to our proposal, here's exactly what happens — step by step, no guesswork, no surprises.</p>
+  <div class="scroll-hint"><span>scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs-header">
+    <button class="tab-btn t-smm active" onclick="switchTab('smm',this)"><span class="tab-dot"></span>Social Media</button>
+    <button class="tab-btn t-brand" onclick="switchTab('brand',this)"><span class="tab-dot"></span>Branding</button>
+    <button class="tab-btn t-visual" onclick="switchTab('visual',this)"><span class="tab-dot"></span>Visual Production</button>
+    <button class="tab-btn t-kol" onclick="switchTab('kol',this)"><span class="tab-dot"></span>KOL Management</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       TAB: SOCIAL MEDIA MANAGEMENT
+  ═══════════════════════════════════════ -->
+  <div class="tab-panel active" id="panel-smm">
+    <div class="svc-label" style="border-color:rgba(24,184,206,.25);background:rgba(24,184,206,.05)">
+      <div class="svc-dot" style="background:var(--teal)"></div>
+      <div style="flex:1"><div class="svc-title" style="color:var(--teal)">Social Media Management</div><div class="svc-desc">End-to-end social media — strategy, content production, posting, and reporting.</div></div>
+      <!-- VIEW TOGGLE -->
+      <div class="view-toggle">
+        <button class="vt-btn vt-client active" onclick="setView('client',this)">Client View</button>
+        <button class="vt-btn vt-internal" onclick="setView('internal',this)">Internal View</button>
+      </div>
+    </div>
+
+    <div class="timeline t-smm" style="--accent:var(--teal)">
+      <div class="tl-track"></div>
+
+      <!-- ── FASE 1 ── -->
+      <div class="phase" data-phase="smm-1">
+        <div class="phase-left"><div class="phase-num p1">1</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--teal)">
+          <div class="phase-ghost">1</div>
+          <div class="phase-top">
+            <div class="phase-heading">Agreement & Administration</div>
+            <div class="phase-timing">Day 0</div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Sign the Quotation</strong>
+              <span>Scan or photo, send back via WhatsApp or email.</span>
+              <span class="pic-tag">Finance & Admin</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Issue Invoice — Down Payment 50%</strong>
+              <span>Issued immediately after signed quotation is received. Include DP deadline: 3 days from signing.</span>
+              <span class="pic-tag">Finance & Admin</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Transfer Down Payment — 50% of total contract</strong>
+              <span>BCA 816-5522-440 a/n PT Custompedia Creative Group. Send proof of transfer after payment.</span>
+              <span class="pic-tag internal-only">Finance & Admin</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Confirm DP received & record payment</strong>
+              <span>Record the date, amount, and send a payment confirmation to the client via WhatsApp.</span>
+              <span class="pic-tag">Finance & Admin</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>We create your dedicated WhatsApp Group</strong>
+              <span>All coordination, content previews, and daily communication happen here. Add other PICs from your team whenever needed.</span>
+              <span class="pic-tag internal-only">MD / AE</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Meet your dedicated team</strong>
+              <span>From Strategist, Social Media Specialist, and Creative Director — tailored to your Scope of Work.</span>
+              <span class="pic-tag internal-only">MD / AE</span>
+            </div></div>
+          </div>
+          <div class="alert a-gold"><span class="al-i">⚡</span><span>DP must be received within 3 days of signing. Onboarding begins only after DP is confirmed.</span></div>
+        </div></div>
+      </div>
+
+      <!-- ── FASE 2 ── -->
+      <div class="phase" data-phase="smm-2">
+        <div class="phase-left"><div class="phase-num p2">2</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--teal)">
+          <div class="phase-ghost">2</div>
+          <div class="phase-top">
+            <div class="phase-heading">Onboarding</div>
+            <div class="phase-timing">H+1 — 3 working days</div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Sign the Service Agreement <span style="font-weight:400;color:var(--muted)">(SPK / MoU)</span></strong>
+              <span>Formal cooperation agreement — scope of work, deliverables, contract period, and payment terms. Sent via WhatsApp or email.</span>
+              <span class="pic-tag internal-only">Finance & Admin</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Sign the NDA <span style="font-weight:400;color:var(--muted)">(Non-Disclosure Agreement)</span></strong>
+              <span>Sent together with the Service Agreement. Protects your account data and business information. Accepted as physical signature (scan/photo) or e-sign.</span>
+              <span class="pic-tag internal-only">Finance & Admin</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Build your Custompedia Client Portal</strong>
+              <span>1 portal per client. AE sets up the portal, creates login credentials, and sends access details to client.</span>
+              <span class="pic-tag">AE</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Client Portal Onboarding — ~30 min online session</strong>
+              <span>A quick walkthrough of your <strong>Custompedia Client Portal</strong> — where to submit your Brand Discovery Form, upload assets, track progress, view content previews, access reports, and check daily updates. Everything in one place.</span>
+              <span class="pic-tag internal-only">AE</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Confirm portal access & login</strong>
+              <span>Log in and confirm access is working. Your portal is your single source of truth for this entire project.</span>
+              <span class="pic-tag internal-only">AE</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Fill in the Brand Discovery Form</strong>
+              <span>Available in your Client Portal. Takes about 15–20 minutes. The more detail you share, the stronger your strategy.</span>
+              <span class="pic-tag internal-only">AE (assist)</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Upload your brand assets via the Portal</strong>
+              <span>Logo, company profile, product photos, brand guideline (if any), and everything on the Asset Request List — all uploaded directly to your Portal.</span>
+              <span class="pic-tag internal-only">Client — AE (assist)</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Provide account access</strong>
+              <span>Instagram Admin via Meta Business Suite, TikTok Creator Tools (if applicable), Meta Ads Manager (if applicable). Step-by-step guides sent in WA Group.</span>
+              <span class="pic-tag internal-only">AE</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Account Setup</strong>
+              <span>We handle account setup — new account creation or existing optimization: bio, profile photo, Linktree, Highlight icons, and consistent username across platforms.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Confirm your approval PIC</strong>
+              <span>One designated person from your team to approve content. Approval window: 48 hours.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+          </div>
+          <div class="alert a-teal"><span class="al-i">💡</span><span>Target: completed within 3 working days after DP. The faster this is done, the sooner your first content goes live.</span></div>
+        </div></div>
+      </div>
+
+      <!-- ── FASE 3 ── -->
+      <div class="phase" data-phase="smm-3">
+        <div class="phase-left"><div class="phase-num p3">3</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--purple)">
+          <div class="phase-ghost">3</div>
+          <div class="phase-top">
+            <div class="phase-heading">Strategy & Creative Direction</div>
+            <div class="phase-timing">H+5 to H+12</div>
+          </div>
+          <div class="task-list">
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Internal Strategy Kickoff Session</strong>
+              <span>SMS team + Creative Director align on: content pillars, tone of voice, competitor differentiation, storytelling angle, and visual direction — all based on the Brand Discovery Form and pitch deck. Mandatory before anything is presented to the client.</span>
+              <span class="pic-tag">SMS + Creative Director</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Receive your Strategy Brief</strong>
+              <span>Before anything is presented to you, our team runs an internal strategy alignment session based on your Discovery Form and pitch deck. Your Strategy Brief contains: Content Pillars, tone of voice, and storytelling direction for the next 3 months — built entirely around your brand.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Receive your Social Media Visual Guideline</strong>
+              <span>Color palette, moodboard, font direction, and visual templates — the creative foundation for every piece of content.</span>
+              <span class="pic-tag internal-only">Creative Director</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Shoot schedule coordinated with Creative Director</strong>
+              <span>We align on location, timing, access requirements, and on-site contact — confirmed 3 days before the visit.</span>
+              <span class="pic-tag internal-only">Creative Director</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Give feedback within 2 working days</strong>
+              <span>Via WhatsApp or your Client Portal. No formal meeting needed unless there's something worth discussing in depth. Scale packages and above: a 30-minute call is scheduled.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- ── FASE 4 ── -->
+      <div class="phase" data-phase="smm-4">
+        <div class="phase-left"><div class="phase-num p4">4</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--gold)">
+          <div class="phase-ghost">4</div>
+          <div class="phase-top">
+            <div class="phase-heading">Production & First Approval</div>
+            <div class="phase-timing">H+7 to H+21</div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Receive your Content Plan</strong>
+              <span>First month: 2 weeks or a full month — depending on the agreed visit shoot schedule. Includes posting dates, format (Reels/Carousel/Story), content pillar, and brief per content.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Visit Shoot execution</strong>
+              <span>On-location content production per the approved brief. Raw footage uploaded to the internal drive within H+1 after the shoot.</span>
+              <span class="pic-tag">Creative Director + Videografer</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Video editing, design, and copywriting</strong>
+              <span>All edits completed H-2 before scheduled posting. Revisions per package: 1x (Essentials), 2x (Growth), 3x (Scale+).</span>
+              <span class="pic-tag">Adam (video) · Ryand (design) · Copywriter</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Review & approve content via your Client Portal</strong>
+              <span>All content previews are accessible in your Portal. Approve or leave revision notes directly there — within 48 hours.</span>
+              <span class="pic-tag internal-only">SMS (kirim) · Client (approve)</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Your first content goes live 🎉</strong>
+              <span>Posted at the optimal day and time, based on platform insight data.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Meta Ads setup (if applicable)</strong>
+              <span>Campaign setup — Awareness + Retargeting. Ad spend paid directly by client to Meta.</span>
+              <span class="pic-tag">Ads Specialist</span>
+            </div></div>
+          </div>
+          <div class="alert a-gold"><span class="al-i">⏱</span><span>No response within 48 hours = content is approved and will be posted as scheduled.</span></div>
+          <div class="rev-grid">
+            <div class="rev-pill">Essentials / Essentials+ &nbsp;<strong>1× revision</strong></div>
+            <div class="rev-pill">Growth Starter / Full &nbsp;<strong>2× revision</strong></div>
+            <div class="rev-pill">Scale / Full Scale &nbsp;<strong>3× revision + priority</strong></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- ── FASE 5 ── -->
+      <div class="phase" data-phase="smm-5">
+        <div class="phase-left"><div class="phase-num p5">5</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--green)">
+          <div class="phase-ghost">5</div>
+          <div class="phase-top">
+            <div class="phase-heading">We're Live — Running & Reporting</div>
+            <div class="phase-timing">Month 1 & 2</div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>All content managed by Custompedia</strong>
+              <span>Posting, scheduling, captions, and hashtags — handled at the optimal day and time based on platform insight data.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Active account management</strong>
+              <span>Depending on your package — from admin posting and community management to full engagement handling.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Daily updates & progress tracking in your Portal</strong>
+              <span>Log into your Custompedia Client Portal anytime to see what's happening — content schedule, posting status, and performance snapshots. Always up to date.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Your role: respond to inbound leads</strong>
+              <span>Reply to DM and WA inquiries within 2 hours during business hours. Follow up on any RFQ or leads. We deliver leads to your door — closing is in your hands.</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Regular performance reports — delivered via your Portal</strong>
+              <span>Monthly, bi-weekly, or weekly depending on your package. Every report includes data, highlights, and strategic recommendations for the next period.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Issue Final Payment Invoice — 7 Days Before Month 3</strong>
+              <span>Invoice sent H-7 before Month 3. Follow-up reminder via WhatsApp at H-3 if not yet confirmed.</span>
+              <span class="pic-tag">Finance & Admin</span>
+            </div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- ── FASE 6 ── -->
+      <div class="phase" data-phase="smm-6">
+        <div class="phase-left"><div class="phase-num p6">6</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:#FF8080">
+          <div class="phase-ghost">6</div>
+          <div class="phase-top">
+            <div class="phase-heading">Settlement & What's Ahead</div>
+            <div class="phase-timing">Start of Month 3</div>
+          </div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body">
+              <strong>Pay remaining 50%</strong>
+              <span>Invoice sent 7 days before Month 3 begins. Reminder at H-3 if not yet settled. BCA 816-5522-440 a/n PT Custompedia Creative Group.</span>
+              <span class="pic-tag internal-only">Finance & Admin</span>
+            </div></div>
+            <div class="task internal-only"><div class="task-icon ti-int">✦</div><div class="task-body">
+              <strong>Confirm final payment received</strong>
+              <span>Record date received. If payment not received by H+3 of Month 3: pause production and escalate to MD.</span>
+              <span class="pic-tag">Finance & Admin</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Final Performance Report — available in your Portal</strong>
+              <span>A 3-month summary: growth, top-performing content, key insights, and strategic recommendations for what comes next.</span>
+              <span class="pic-tag internal-only">SMS</span>
+            </div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body">
+              <strong>Growth discussion & renewal</strong>
+              <span>Our team will reach out before your contract ends. No obligation — but we'll have the data to make a compelling case for what comes next.</span>
+              <span class="pic-tag internal-only">MD / AE</span>
+            </div></div>
+          </div>
+        </div></div>
+      </div>
+
+    </div><!-- end timeline smm -->
+
+    <!-- Payment SMM -->
+    <div class="pay-grid">
+      <div class="pay-card"><div class="pay-label">Payment 1</div><div class="pay-amount">50%</div><div class="pay-desc">Down Payment — 50% of your total 3-month contract</div><div class="pay-timing">⚡ Due within 3 days of signing. Onboarding begins once confirmed.</div></div>
+      <div class="pay-card"><div class="pay-label">Payment 2</div><div class="pay-amount">50%</div><div class="pay-desc">Final Payment — remaining 50% balance</div><div class="pay-timing">📅 Due at the start of Month 3. We'll send a reminder 7 days before.</div></div>
+    </div>
+    <div class="svc-spacer"></div>
+  </div><!-- end smm panel -->
+
+
+  <!-- ═══════════════════════════════════════
+       TAB: BRANDING
+  ═══════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-brand">
+    <div class="svc-label" style="border-color:rgba(244,162,41,.25);background:rgba(244,162,41,.05)">
+      <div class="svc-dot" style="background:var(--gold)"></div>
+      <div><div class="svc-title" style="color:var(--gold)">Branding & Identity</div><div class="svc-desc">One-time project — logo, brand guidelines, visual identity, and more.</div></div>
+    </div>
+    <div class="timeline t-brand" style="--accent:var(--gold)">
+      <div class="tl-track"></div>
+
+      <div class="phase" data-phase="brand-1">
+        <div class="phase-left"><div class="phase-num p1">1</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--gold)">
+          <div class="phase-ghost">1</div>
+          <div class="phase-top"><div class="phase-heading">Agreement & Down Payment</div><div class="phase-timing">Day 0</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Sign the Quotation</strong><span>Scan or photo, send back via WhatsApp or email.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Transfer Down Payment — 50% of total project value</strong><span>BCA 816-5522-440 a/n PT Custompedia Creative Group. Send proof of transfer after payment.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>We create your dedicated WhatsApp Group</strong><span>Created by our Managing Director. All project updates, concept reviews, and revisions are coordinated here.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Meet your dedicated team</strong><span>Your Creative Director and Brand Designer — dedicated to your project from brief to final delivery.</span></div></div>
+          </div>
+          <div class="alert a-gold"><span class="al-i">⚡</span><span>Project begins only after DP is confirmed. Down Payment is due within 3 days of signing.</span></div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="brand-2">
+        <div class="phase-left"><div class="phase-num p2">2</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--gold)">
+          <div class="phase-ghost">2</div>
+          <div class="phase-top"><div class="phase-heading">Onboarding & Brief</div><div class="phase-timing">H+1 — 2 working days</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Sign the Service Agreement (SPK/MoU)</strong><span>Outlines scope, deliverables, revision rounds, and ownership of final files. Sent via WhatsApp or email.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Sign the NDA</strong><span>Sent together with the Service Agreement. Protects your business information. Accepted as scan/photo or e-sign.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Your Google Drive project folder is ready</strong><span>All brand references, concept drafts, and final files are organized here. Accessible to you anytime.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Fill in the Brand Brief Form</strong><span>Share your brand story, values, target audience, visual references, and things you want to avoid. This brief shapes everything we create.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Brief consultation call (if needed)</strong><span>For Momentum and Elevate packages — a 30-minute call to align on direction before production starts. We reach out to schedule this.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="brand-3">
+        <div class="phase-left"><div class="phase-num p3">3</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--purple)">
+          <div class="phase-ghost">3</div>
+          <div class="phase-top"><div class="phase-heading">Concept Development</div><div class="phase-timing">Working days 3–10 (varies by package)</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>We present initial logo concepts</strong><span>2–3 distinct concepts based on your brief — each with a rationale. Sent via Google Drive. Ignite: 2 concepts · Momentum & Elevate: 3 concepts.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Choose your preferred direction</strong><span>Pick one concept to develop further, or give notes for adjustment. No need for a call — notes via WhatsApp work perfectly.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Revisions applied</strong><span>Up to 3 rounds of revisions included across all packages. Each round refines based on your feedback until the logo is exactly right.</span></div></div>
+          </div>
+          <div class="alert a-teal"><span class="al-i">💡</span><span>"Unlimited revisions" covers minor adjustments — color, spacing, size. Full concept changes beyond the included rounds are quoted separately.</span></div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="brand-4">
+        <div class="phase-left"><div class="phase-num p4">4</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--green)">
+          <div class="phase-ghost">4</div>
+          <div class="phase-top"><div class="phase-heading">Production & Final Delivery</div><div class="phase-timing">Working days 10–21 (varies by package)</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Full brand identity production</strong><span>Color palette, typography, logo guideline, mockups, brand story (Momentum+), social media templates (Elevate), and all other deliverables per your package.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Final file package prepared</strong><span>JPG, PNG (transparent), PDF, SVG, AI, PSD — all formats, organized and labeled. Delivered via Google Drive.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Final approval from you</strong><span>Review the complete deliverables. Once you confirm, the final payment invoice is issued.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="brand-5">
+        <div class="phase-left"><div class="phase-num p5">5</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:#FF8080">
+          <div class="phase-ghost">5</div>
+          <div class="phase-top"><div class="phase-heading">Final Payment & File Handover</div><div class="phase-timing">Upon project completion</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Pay remaining 50% — before final files are released</strong><span>Invoice sent upon your approval of the final output. BCA 816-5522-440 a/n PT Custompedia Creative Group.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>All final files transferred to you</strong><span>Full ownership passes to you upon complete payment. Files stored on our server for 30 days as backup.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Portfolio rights retained by Custompedia</strong><span>We may feature the completed work in our portfolio unless a confidentiality agreement is in place.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+    </div><!-- end timeline brand -->
+
+    <!-- Payment Branding -->
+    <div class="pay-steps">
+      <div class="pay-step-card"><div class="pay-step-num">1</div><div class="pay-step-title">Down Payment</div><div class="pay-step-desc">Upon project confirmation. Production begins immediately.</div><div class="pay-step-amt">50%</div></div>
+      <div class="pay-step-card"><div class="pay-step-num">2</div><div class="pay-step-title">Project Running</div><div class="pay-step-desc">Design, revisions, and production. No additional payment during this phase.</div><div class="pay-step-amt" style="color:var(--muted)">—</div></div>
+      <div class="pay-step-card"><div class="pay-step-num">3</div><div class="pay-step-title">Final Payment</div><div class="pay-step-desc">Before final files are released to you. Upon your approval of all deliverables.</div><div class="pay-step-amt">50%</div></div>
+    </div>
+    <div class="svc-spacer"></div>
+  </div><!-- end brand panel -->
+
+  <!-- ═══════════════════════════════════════
+       TAB: VISUAL PRODUCTION
+  ═══════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-visual">
+    <div class="svc-label" style="border-color:rgba(244,114,182,.25);background:rgba(244,114,182,.05)">
+      <div class="svc-dot" style="background:var(--pink)"></div>
+      <div><div class="svc-title" style="color:var(--pink)">Visual Production</div><div class="svc-desc">Product photography, fashion catalogue, lookbook, F&B, and event coverage.</div></div>
+    </div>
+    <div class="timeline t-visual" style="--accent:var(--pink)">
+      <div class="tl-track"></div>
+
+      <div class="phase" data-phase="visual-1">
+        <div class="phase-left"><div class="phase-num p1">1</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--pink)">
+          <div class="phase-ghost">1</div>
+          <div class="phase-top"><div class="phase-heading">Inquiry & Booking</div><div class="phase-timing">Day 0</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Share your shoot requirements</strong><span>Type of shoot (product flatlay, fashion, lookbook, F&B, event), number of SKUs or duration, and your preferred timeline. We respond with a tailored quote within 24 hours.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Confirm the booking and pay deposit</strong><span>50% deposit required to confirm your slot. Packages under Rp 2,000,000: full payment upfront. BCA 816-5522-440 a/n PT Custompedia Creative Group.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Session slot confirmed</strong><span>Your shoot date is secured once payment is confirmed. We send a booking confirmation with all session details.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>We create your project WA Group</strong><span>All pre-shoot coordination, briefs, and delivery updates happen here.</span></div></div>
+          </div>
+          <div class="alert a-gold"><span class="al-i">⚡</span><span>No session starts until payment is confirmed. Remaining 50% is due the day before the shoot session.</span></div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="visual-2">
+        <div class="phase-left"><div class="phase-num p2">2</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--pink)">
+          <div class="phase-ghost">2</div>
+          <div class="phase-top"><div class="phase-heading">Pre-Shoot Preparation</div><div class="phase-timing">H+1 to H+3 — before shoot day</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Submit your visual reference & brief</strong><span>Share mood references, brand colors, specific angles or compositions you want. This brief ensures the output matches your brand — not just generic product shots.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Ship or deliver your products / assets to us</strong><span>For studio shoots: products shipped or delivered to Custompedia's studio. For on-location: we coordinate the visit details with you. Custompedia is not liable for product damage during shipping.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Custompedia prepares props, lighting, and set</strong><span>Props and backgrounds are provided by us for studio shoots. For fashion and lookbook sessions, model briefing and MUA coordination (where included) are handled by our team.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Final payment due the day before shoot</strong><span>Remaining 50% balance confirmed. Session proceeds as scheduled.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="visual-3">
+        <div class="phase-left"><div class="phase-num p3">3</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--gold)">
+          <div class="phase-ghost">3</div>
+          <div class="phase-top"><div class="phase-heading">Shoot Day</div><div class="phase-timing">Confirmed session date</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Studio or on-location session executed</strong><span>Our photographer and creative team handle the full session. For fashion and lookbook shoots, model and MUA (where included) are managed by Custompedia.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Raw footage uploaded to Google Drive</strong><span>Raw files backed up to your project folder within 24 hours of the session. Post-production begins immediately after.</span></div></div>
+          </div>
+          <div class="alert a-teal"><span class="al-i">🌦️</span><span>For outdoor sessions: Custompedia reserves the right to reschedule if weather is unsuitable. No rescheduling fee. The call to reschedule is ours — made in the interest of output quality.</span></div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="visual-4">
+        <div class="phase-left"><div class="phase-num p4">4</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--green)">
+          <div class="phase-ghost">4</div>
+          <div class="phase-top"><div class="phase-heading">Post-Production & Delivery</div><div class="phase-timing">3–5 business days after shoot</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Editing, color grading, and retouching</strong><span>All photos edited with brand-consistent color grading. Videos cut and color graded. Output curated for your platform (ratio, tone, brand consistency).</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Final files delivered via Google Drive</strong><span>JPG high-resolution (photos) and MP4 H.264 (videos). Multi-format files included where applicable (1:1, 4:5, 9:16). Raw files not included unless separately agreed.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Review & confirm delivery</strong><span>Check that all files are complete and correct. Files stored on our server for 30 days after delivery — download promptly.</span></div></div>
+          </div>
+          <div class="rev-grid">
+            <div class="rev-pill">Product Flatlay &nbsp;<strong>3 business days</strong></div>
+            <div class="rev-pill">Fashion / Lookbook &nbsp;<strong>3–5 business days</strong></div>
+            <div class="rev-pill">Event Coverage &nbsp;<strong>Photos 24hrs · Video 48–72hrs</strong></div>
+          </div>
+        </div></div>
+      </div>
+    </div><!-- end timeline visual -->
+
+    <!-- Payment Visual -->
+    <div class="pay-steps">
+      <div class="pay-step-card"><div class="pay-step-num">1</div><div class="pay-step-title">Booking Deposit</div><div class="pay-step-desc">Upon booking confirmation. Secures your session slot.</div><div class="pay-step-amt">50%</div></div>
+      <div class="pay-step-card"><div class="pay-step-num">2</div><div class="pay-step-title">Shoot Day – 1</div><div class="pay-step-desc">Remaining balance due the day before the session.</div><div class="pay-step-amt">50%</div></div>
+      <div class="pay-step-card"><div class="pay-step-num" style="font-size:11px">📦</div><div class="pay-step-title">Under Rp 2M</div><div class="pay-step-desc">Packages under Rp 2,000,000 require full payment upfront at booking.</div><div class="pay-step-amt">100%</div></div>
+    </div>
+    <div class="svc-spacer"></div>
+  </div><!-- end visual panel -->
+
+  <!-- ═══════════════════════════════════════
+       TAB: KOL MANAGEMENT
+  ═══════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-kol">
+    <div class="svc-label" style="border-color:rgba(34,201,122,.25);background:rgba(34,201,122,.05)">
+      <div class="svc-dot" style="background:var(--green)"></div>
+      <div><div class="svc-title" style="color:var(--green)">KOL Management</div><div class="svc-desc">From brief to final report — every KOL touchpoint managed with data, strategy, and accountability.</div></div>
+    </div>
+    <div class="timeline t-kol" style="--accent:var(--green)">
+      <div class="tl-track"></div>
+
+      <div class="phase" data-phase="kol-1">
+        <div class="phase-left"><div class="phase-num p1">1</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--green)">
+          <div class="phase-ghost">1</div>
+          <div class="phase-top"><div class="phase-heading">Proposal & Agreement</div><div class="phase-timing">Day 0</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Share your campaign objective</strong><span>Tell us: your goal (awareness, conversion, affiliate), KOL count estimate, platform (IG/TikTok), timeline, and budget range. We'll come back with a tailored proposal within 24 hours. No commitment required.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Confirm the management package</strong><span>Per Campaign, Monthly Retainer, or Performance-Based — depending on your campaign type and frequency.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Sign the Service Agreement (SPK/MoU) & NDA</strong><span>Sent via WhatsApp or email. Covers scope, timeline, KOL fee structure, confidentiality, and content usage rights. Management fee excludes KOL fees and product costs.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Transfer management fee deposit</strong><span>50% of management fee to confirm the campaign. KOL fees billed separately as they are contracted. BCA 816-5522-440 a/n PT Custompedia Creative Group.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Dedicated WA Group created</strong><span>All campaign updates, KOL shortlists, brief approvals, and reports coordinated here.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="kol-2">
+        <div class="phase-left"><div class="phase-num p2">2</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--green)">
+          <div class="phase-ghost">2</div>
+          <div class="phase-top"><div class="phase-heading">Campaign Brief & KOL Vetting</div><div class="phase-timing">H+1 to H+5</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Submit your campaign brief</strong><span>Key message, product details, dos and don'ts, visual reference, posting deadline, and any exclusivity requirements. The more specific, the better the KOL match.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>5-step KOL vetting process begins</strong><span>Every shortlisted KOL is evaluated: Engagement Rate Audit · Audience Match · 3-Month Content History · Activity Check · Brand Safety Screen. Follower count is the last thing we look at.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>KOL shortlist presented to you</strong><span>We present a vetted shortlist with profile data, ER, audience demographics, and a rationale for each recommendation. You review and approve before we reach out.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Approve the KOL shortlist</strong><span>Confirm which KOL to proceed with. Notes and replacements can be requested at this stage.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="kol-3">
+        <div class="phase-left"><div class="phase-num p3">3</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--teal)">
+          <div class="phase-ghost">3</div>
+          <div class="phase-top"><div class="phase-heading">Dealing, Brief & Pre-Campaign Setup</div><div class="phase-timing">H+5 to H+10</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Custompedia handles all KOL negotiation & contracting</strong><span>Rate negotiation, deal structuring, content guidelines, posting timeline, exclusivity clause, and a signed contract per KOL — all managed by us.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Strategic brief distributed to all KOL</strong><span>A custom brief kit — key message, mandatory mentions, visual references, content dos & don'ts, posting window. Optional: branded visual brief kit (mood boards + key visuals produced by Custompedia's team) available as an add-on.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Ship products / assets to KOL</strong><span>Coordinate product delivery to each confirmed KOL per the agreed timeline. Custompedia tracks receipt confirmation.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="kol-4">
+        <div class="phase-left"><div class="phase-num p4">4</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:var(--gold)">
+          <div class="phase-ghost">4</div>
+          <div class="phase-top"><div class="phase-heading">Campaign Live & Monitoring</div><div class="phase-timing">Per agreed posting window</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Content QC before every post</strong><span>All KOL content is reviewed by Custompedia before publishing — checked against the brief for accuracy, compliance, and brand safety. We flag and request changes before anything goes live.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>All KOL posts monitored in real time</strong><span>Posting compliance tracked. Any delays or non-delivery escalated and managed immediately per the contract terms.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Your role: track inbound results</strong><span>Monitor any spikes in DM inquiries, promo code redemptions, or affiliate link clicks. Share any notable results with us — this feeds the final report.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="phase" data-phase="kol-5">
+        <div class="phase-left"><div class="phase-num p5">5</div></div>
+        <div style="flex:1"><div class="phase-card" style="--ac:#FF8080">
+          <div class="phase-ghost">5</div>
+          <div class="phase-top"><div class="phase-heading">Post-Campaign Report & Settlement</div><div class="phase-timing">Within 3–5 days of campaign close</div></div>
+          <div class="task-list">
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Post-Campaign Intelligence Report delivered</strong><span>Not a screenshot deck. A full strategy document: individual KOL performance scoring, Retain / Review / Replace recommendation per KOL, and 3 actionable insights for your next campaign.</span></div></div>
+            <div class="task"><div class="task-icon ti-a">→</div><div class="task-body"><strong>Pay remaining 50% management fee</strong><span>Invoice issued upon campaign close and report delivery. BCA 816-5522-440 a/n PT Custompedia Creative Group.</span></div></div>
+            <div class="task"><div class="task-icon ti-c">✓</div><div class="task-body"><strong>Content usage rights clarified</strong><span>KOL content cleared for brand reuse — reposts, paid whitelisting, and marketing materials — as specified in each KOL contract.</span></div></div>
+          </div>
+        </div></div>
+      </div>
+    </div><!-- end timeline kol -->
+
+    <!-- Payment KOL -->
+    <div class="pay-steps">
+      <div class="pay-step-card"><div class="pay-step-num">1</div><div class="pay-step-title">Deposit</div><div class="pay-step-desc">50% management fee upon campaign confirmation. KOL fees billed separately.</div><div class="pay-step-amt">50%</div></div>
+      <div class="pay-step-card"><div class="pay-step-num">2</div><div class="pay-step-title">Campaign Running</div><div class="pay-step-desc">KOL fees settled as campaigns are contracted and executed. Management continues.</div><div class="pay-step-amt" style="color:var(--muted)">KOL fees</div></div>
+      <div class="pay-step-card"><div class="pay-step-num">3</div><div class="pay-step-title">Final Settlement</div><div class="pay-step-desc">Remaining 50% management fee upon campaign close and report delivery.</div><div class="pay-step-amt">50%</div></div>
+    </div>
+    <div class="svc-spacer"></div>
+  </div><!-- end kol panel -->
+
+</div><!-- end tabs-wrap -->
+
+<!-- CLOSING -->
+<div class="closing-wrap">
+  <div class="closing-card">
+    <div class="closing-ey">Why Custompedia</div>
+    <h2 class="closing-h2">Ready When You Are.</h2>
+    <p class="closing-body">Great work doesn't happen by accident. It's built on clear process, the right team, and a partner who cares about your results as much as you do.</p>
+    <p class="closing-body">We've shown you exactly what to expect — because transparency is how every great partnership begins, and consistency is how we maintain it.</p>
+    <p class="closing-punch">One signature. <em>Let's build something worth following.</em></p>
+    <a href="https://wa.me/6282226171071" class="cta-btn">Get Started →</a>
+    <div class="closing-contact">
+      <a href="mailto:hello@custompedia.agency">hello@custompedia.agency</a>
+      <a href="#">@custompedia</a>
+      <a href="tel:082226171071">082226171071</a>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 PT. Custompedia Creative Group — Semarang, Jawa Tengah</footer>
+
+<script>
+// Tab switching
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  // Re-trigger animations for newly visible phases
+  document.querySelectorAll('#panel-' + id + ' .phase').forEach((p,i) => {
+    p.classList.remove('visible');
+    p.style.transitionDelay = (i * 0.05) + 's';
+    setTimeout(() => p.classList.add('visible'), 50);
+  });
+}
+
+// Intersection observer for scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.phase').forEach((p, i) => {
+  p.style.transitionDelay = (i * 0.05) + 's';
+  obs.observe(p);
+});
+
+// Dual view state management
+let currentView = 'client';
+function setView(view, btn) {
+  currentView = view;
+  document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const tl = document.querySelector('#panel-smm .timeline');
+  if (view === 'internal') {
+    tl.classList.remove('smm-client-view');
+    tl.classList.add('smm-internal-view');
+  } else {
+    tl.classList.remove('smm-internal-view');
+    tl.classList.add('smm-client-view');
+  }
+}
+// Init: default client view
+document.addEventListener('DOMContentLoaded', () => {
+  const tl = document.querySelector('#panel-smm .timeline');
+  if (tl) tl.classList.add('smm-client-view');
+});
+
+</script>
+</body>
+</html>
